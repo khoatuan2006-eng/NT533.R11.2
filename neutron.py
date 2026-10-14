@@ -35,3 +35,21 @@ class Neutron:
 
     def delete_subnet(self, subnet_id):
         self.cloud.request("DELETE", self.url + "/subnets/" + subnet_id)
+
+    def list_routers(self):
+        data = self.cloud.request("GET", self.url + "/routers")
+        return data["routers"]
+
+    def create_router(self, name):
+        data = {
+            "router": {
+                "name": name,
+                "admin_state_up": True
+            }
+        }
+
+        result = self.cloud.request("POST", self.url + "/routers", data)
+        return result["router"]
+
+    def delete_router(self, router_id):
+        self.cloud.request("DELETE", self.url + "/routers/" + router_id)
