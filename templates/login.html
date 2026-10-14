@@ -1,0 +1,6 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Đăng nhập · OpenStack Lab</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head><body class="login-page"><main class="login-card"><div class="brand"><span class="logo">O</span> openstack <small>LAB</small></div><h1>Đăng nhập</h1><p class="muted">Quản lý tài nguyên cloud của bạn.</p>
+{% for category, message in get_flashed_messages(with_categories=true) %}<div role="alert" class="alert {{ category }}">{{ message }}</div>{% endfor %}
+<form method="post" action="{{ url_for('login') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<label>Tài khoản<input name="username" required autocomplete="username"></label>
+<label>Mật khẩu<input type="password" name="password" required autocomplete="current-password"></label>
+<label>Project ID<input name="project_id" required></label><label>Domain<input name="domain" value="Default" required></label><button class="primary full">Đăng nhập</button></form><p class="login-footer">NT533 · Hệ tính toán phân bố</p></main></body></html>

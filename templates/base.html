@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}OpenStack Lab{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topbar"><a class="brand" href="{{ url_for('instances') }}"><span class="logo">O</span> openstack <small>LAB</small></a><span>Project: {{ project_name|default('—', true) }}</span><div class="account">{{ username|default('Người dùng', true) }}<form method="post" action="{{ url_for('logout') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="logout">Đăng xuất</button></form></div></header>
+<div class="layout"><aside><div class="nav-label">PROJECT</div><div class="nav-group">Compute</div>
+<a class="{{ 'active' if request.endpoint == 'instances' }}" href="{{ url_for('instances') }}">Instances</a>
+<a class="{{ 'active' if request.endpoint == 'images_flavors' }}" href="{{ url_for('images_flavors') }}">Images & Flavors</a>
+<div class="nav-group">Network</div><a class="{{ 'active' if request.endpoint == 'networks' }}" href="{{ url_for('networks') }}">Networks & Subnets</a><a class="{{ 'active' if request.endpoint == 'routers' }}" href="{{ url_for('routers') }}">Routers</a><div class="sidebar-foot">NT533 · OpenStack API<br>Nhóm 15</div></aside>
+<main><div class="breadcrumb">Project / {% block section %}Compute{% endblock %}</div>
+{% for category, message in get_flashed_messages(with_categories=true) %}<div role="alert" class="alert {{ category }}">{{ message }}</div>{% endfor %}
+{% block content %}{% endblock %}</main></div>
+<script>document.addEventListener('submit', function(e) { const message = e.target.dataset.confirm; if (message && !confirm(message)) e.preventDefault(); });</script>
+</body></html>
