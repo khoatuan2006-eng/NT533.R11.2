@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Images & Flavors · OpenStack Lab{% endblock %}
+{% block section %}Compute{% endblock %}
+{% block content %}
+<h1>Images & Flavors</h1>
+<p class="muted">Image và cấu hình máy ảo tài khoản có thể truy cập.</p><h2>Images</h2><div class="table-wrap"><table><thead><tr><th>Tên / ID</th><th>Trạng thái</th><th>Định dạng</th></tr></thead><tbody>{% for item in images %}<tr><td><strong>{{ item.name }}</strong><small class="resource-id">{{ item.id }}</small></td><td><span class="status {{ 'ok' if item.status|lower == 'active' else 'neutral' }}">{{ item.status }}</span></td><td>{{ item.disk_format }}</td></tr>{% else %}<tr><td class="empty" colspan="3">Chưa có tài nguyên để hiển thị.</td></tr>{% endfor %}</tbody></table></div><h2>Flavors</h2><div class="table-wrap"><table><thead><tr><th>Tên / ID</th><th>vCPU</th><th>RAM (MB)</th><th>Disk (GB)</th></tr></thead><tbody>{% for item in flavors %}<tr><td><strong>{{ item.name }}</strong><small class="resource-id">{{ item.id }}</small></td><td>{{ item.vcpus }}</td><td>{{ item.ram }}</td><td>{{ item.disk }}</td></tr>{% else %}<tr><td class="empty" colspan="4">Chưa có tài nguyên để hiển thị.</td></tr>{% endfor %}</tbody></table></div>{% endblock %}
