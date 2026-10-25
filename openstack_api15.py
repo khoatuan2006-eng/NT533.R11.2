@@ -54,6 +54,12 @@ class OpenStackAPI15:
             json=data,
             timeout=30
         )
+        if not r.ok:
+            try:
+                err_detail = r.json()
+            except Exception:
+                err_detail = r.text
+            print(f"\n[Chi tiet loi {r.status_code} tu OpenStack]: {err_detail}\n")
         r.raise_for_status()
 
         if r.content:
